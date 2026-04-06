@@ -1,0 +1,49 @@
+# ==========================================
+# 1. PROJECT SPECIFIC DATA & MODELS (CRITICAL)
+# ==========================================
+# Ignore all data directories (raw, processed, tft)
+data/
+!data/.keep 
+
+# Ignore PyTorch Lightning model checkpoints and logs
+models/
+lightning_logs/
+*.ckpt
+*.pt
+*.pth
+
+# Ignore serialized data files
+*.parquet
+*.pkl
+*.csv
+*.nc
+
+# ==========================================
+# 2. PYTHON & ENVIRONMENT SETTINGS
+# ==========================================
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Virtual Environments
+venv/
+.venv/
+env/
+.env
+
+# ==========================================
+# 3. JUPYTER NOTEBOOKS
+# ==========================================
+.ipynb_checkpoints/
+
+# ==========================================
+# 4. OS & IDE SETTINGS
+# ==========================================
+# Mac / Windows system files
+.DS_Store
+Thumbs.db
+
+# VS Code / PyCharm settings
+.vscode/
+.idea/
