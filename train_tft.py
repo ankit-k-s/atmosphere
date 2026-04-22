@@ -19,7 +19,7 @@ os.makedirs(MODEL_DIR, exist_ok=True)
 # H100 GPU PRODUCTION CONFIGURATION
 # ---------------------------------------------------------
 BATCH_SIZE = 1024         # Massive batch size to saturate 80GB VRAM
-MAX_EPOCHS = 30           # Full training cycle
+MAX_EPOCHS = 50           # Full training cycle
 LEARNING_RATE = 0.03
 NUM_WORKERS = 8           # High CPU thread count to keep the GPU fed
 DATASET_FRACTION = 1.0    # 100% of the 13.4 million row dataset
@@ -54,8 +54,8 @@ def train_tft_model():
     )
     
     # Enable persistent workers to prevent data loading bottlenecks between epochs
-    train_dataloader = training_dataset.to_dataloader(train=True, batch_size=BATCH_SIZE, num_workers=NUM_WORKERS, persistent_workers=True)
-    val_dataloader = validation_dataset.to_dataloader(train=False, batch_size=BATCH_SIZE * 2, num_workers=NUM_WORKERS, persistent_workers=True)
+    train_dataloader = training_dataset.to_dataloader(train=True, batch_size=BATCH_SIZE, num_workers=NUM_WORKERS, persistent_workers=True, pin_memory=True)
+    val_dataloader = validation_dataset.to_dataloader(train=False, batch_size=BATCH_SIZE * 2, num_workers=NUM_WORKERS, persistent_workers=True, pin_memory=True)
     
     num_targets = len(training_dataset.target_names)
     multi_loss = MultiLoss([QuantileLoss()] * num_targets)
